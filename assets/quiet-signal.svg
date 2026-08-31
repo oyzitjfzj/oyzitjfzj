@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="190" viewBox="0 0 1200 190" role="img" aria-label="Quiet signal animation">
+  <defs>
+    <linearGradient id="line" x1="0" x2="1">
+      <stop offset="0" stop-color="#8b949e" stop-opacity="0"/>
+      <stop offset="0.18" stop-color="#8b949e" stop-opacity="0.22"/>
+      <stop offset="0.50" stop-color="#c9d1d9" stop-opacity="0.75"/>
+      <stop offset="0.82" stop-color="#8b949e" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#8b949e" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="dot">
+      <stop offset="0" stop-color="#f0f6fc" stop-opacity="1"/>
+      <stop offset="0.38" stop-color="#c9d1d9" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#8b949e" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow" x="-250%" y="-250%" width="500%" height="500%">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+  </defs>
+
+  <path d="M80 95 C250 95 300 95 430 95 S760 95 1120 95" fill="none" stroke="url(#line)" stroke-width="1"/>
+
+  <g opacity="0.28">
+    <circle cx="300" cy="95" r="2.2" fill="#8b949e">
+      <animate attributeName="opacity" values="0.18;0.7;0.18" dur="7s" repeatCount="indefinite" begin="-1.4s"/>
+    </circle>
+    <circle cx="600" cy="95" r="2.2" fill="#8b949e">
+      <animate attributeName="opacity" values="0.15;0.8;0.15" dur="8s" repeatCount="indefinite" begin="-4s"/>
+    </circle>
+    <circle cx="900" cy="95" r="2.2" fill="#8b949e">
+      <animate attributeName="opacity" values="0.18;0.7;0.18" dur="7.5s" repeatCount="indefinite" begin="-2.2s"/>
+    </circle>
+  </g>
+
+  <circle r="18" fill="url(#dot)" filter="url(#glow)" opacity="0.58">
+    <animateMotion dur="10s" repeatCount="indefinite" path="M80 95 C250 95 300 95 430 95 S760 95 1120 95"/>
+    <animate attributeName="opacity" values="0;0.7;0.7;0" keyTimes="0;0.08;0.92;1" dur="10s" repeatCount="indefinite"/>
+  </circle>
+
+  <circle r="3.2" fill="#f0f6fc">
+    <animateMotion dur="10s" repeatCount="indefinite" path="M80 95 C250 95 300 95 430 95 S760 95 1120 95"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="10s" repeatCount="indefinite"/>
+  </circle>
+
+  <path d="M515 95 C550 73 570 117 600 95 C630 73 650 117 685 95" fill="none" stroke="#8b949e" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="8 18" opacity="0.22">
+    <animate attributeName="stroke-dashoffset" from="0" to="-104" dur="12s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.08;0.32;0.08" dur="9s" repeatCount="indefinite"/>
+  </path>
+</svg>
