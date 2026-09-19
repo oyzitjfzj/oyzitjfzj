@@ -1,0 +1,88 @@
+name: LAS Exact Toolchain Cache
+
+on:
+  push:
+    branches:
+      - las-verification-cache-builder
+    paths:
+      - "tools/las-build-toolchain-cache.sh"
+      - ".github/workflows/las-toolchain-cache.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build exact verification cache
+        run: |
+          set -euo pipefail
+          mkdir -p _las_cache
+          chmod +x tools/las-build-toolchain-cache.sh
+          tools/las-build-toolchain-cache.sh "$PWD/_las_cache/las-verification-toolchain-cache.tar.gz"
+          (cd _las_cache && sha256sum -c las-verification-toolchain-cache.tar.gz.sha256)
+          tar -tzf _las_cache/las-verification-toolchain-cache.tar.gz | head -100
+          split -b 190M -d -a 2 _las_cache/las-verification-toolchain-cache.tar.gz _las_cache/part-
+          sha256sum _las_cache/part-* > _las_cache/PARTS-SHA256SUMS
+          ls -lh _las_cache
+      - name: Upload metadata
+        uses: actions/upload-artifact@v4
+        with:
+          name: las-cache-metadata
+          path: |
+            _las_cache/las-verification-toolchain-cache.tar.gz.sha256
+            _las_cache/PARTS-SHA256SUMS
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 00
+        if: ${{ hashFiles('_las_cache/part-00') != '' }}
+        uses: actions/upload-artifact@v4
+        with: {name: las-cache-part-00, path: _las_cache/part-00, retention-days: 1, compression-level: 0}
+      - name: Upload part 01
+        if: ${{ hashFiles('_las_cache/part-01') != '' }}
+        uses: actions/upload-artifact@v4
+        with: {name: las-cache-part-01, path: _las_cache/part-01, retention-days: 1, compression-level: 0}
+      - name: Upload part 02
+        if: ${{ hashFiles('_las_cache/part-02') != '' }}
+        uses: actions/upload-artifact@v4
+        with: {name: las-cache-part-02, path: _las_cache/part-02, retention-days: 1, compression-level: 0}
+      - name: Upload part 03
+        if: ${{ hashFiles('_las_cache/part-03') != '' }}
+        uses: actions/upload-artifact@v4
+        with: {name: las-cache-part-03, path: _las_cache/part-03, retention-days: 1, compression-level: 0}
+      - name: Upload part 04
+        if: ${{ hashFiles('_las_cache/part-04') != '' }}
+        uses: actions/upload-artifact@v4
+        with: {name: las-cache-part-04, path: _las_cache/part-04, retention-days: 1, compression-level: 0}
+      - name: Upload part 05
+        if: ${{ hashFiles('_las_cache/part-05') != '' }}
+        uses: actions/upload-artifact@v4
+        with: {name: las-cache-part-05, path: _las_cache/part-05, retention-days: 1, compression-level: 0}
+      - name: Upload part 06
+        if: ${{ hashFiles('_las_cache/part-06') != '' }}
+        uses: actions/upload-artifact@v4
+        with: {name: las-cache-part-06, path: _las_cache/part-06, retention-days: 1, compression-level: 0}
+      - name: Upload part 07
+        if: ${{ hashFiles('_las_cache/part-07') != '' }}
+        uses: actions/upload-artifact@v4
+        with: {name: las-cache-part-07, path: _las_cache/part-07, retention-days: 1, compression-level: 0}
+      - name: Upload part 08
+        if: ${{ hashFiles('_las_cache/part-08') != '' }}
+        uses: actions/upload-artifact@v4
+        with: {name: las-cache-part-08, path: _las_cache/part-08, retention-days: 1, compression-level: 0}
+      - name: Upload part 09
+        if: ${{ hashFiles('_las_cache/part-09') != '' }}
+        uses: actions/upload-artifact@v4
+        with: {name: las-cache-part-09, path: _las_cache/part-09, retention-days: 1, compression-level: 0}
+      - name: Upload part 10
+        if: ${{ hashFiles('_las_cache/part-10') != '' }}
+        uses: actions/upload-artifact@v4
+        with: {name: las-cache-part-10, path: _las_cache/part-10, retention-days: 1, compression-level: 0}
+      - name: Upload part 11
+        if: ${{ hashFiles('_las_cache/part-11') != '' }}
+        uses: actions/upload-artifact@v4
+        with: {name: las-cache-part-11, path: _las_cache/part-11, retention-days: 1, compression-level: 0}
