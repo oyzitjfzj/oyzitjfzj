@@ -1,0 +1,21 @@
+name: LAS Public Runner Probe
+
+on:
+  push:
+    branches:
+      - las-verification-cache-builder
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Prove public hosted runner execution
+        run: |
+          set -euxo pipefail
+          uname -a
+          echo LAS_PUBLIC_RUNNER_OK
